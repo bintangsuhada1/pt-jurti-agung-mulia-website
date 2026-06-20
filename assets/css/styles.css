@@ -1,3 +1,4 @@
+/* Base */
 :root {
   --color-primary: #1e40af;
   --color-primary-dark: #17327f;
@@ -39,6 +40,7 @@
 html {
   scroll-behavior: smooth;
   text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -50,6 +52,7 @@ body {
   line-height: 1.68;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 a {
@@ -79,6 +82,7 @@ ol {
 h1,
 h2,
 h3 {
+  overflow-wrap: break-word;
   margin: 0 0 1rem;
   color: var(--color-navy);
   font-weight: 760;
@@ -102,6 +106,7 @@ h3 {
 .container {
   width: min(var(--container-width), calc(100% - 48px));
   margin: 0 auto;
+  min-width: 0;
 }
 
 .narrow {
@@ -124,6 +129,7 @@ h3 {
   left: 12px;
 }
 
+/* Header */
 .topbar {
   background: var(--color-navy);
   color: #cbd5e1;
@@ -586,6 +592,7 @@ h3 {
   line-height: 1.68;
 }
 
+/* Cards */
 .card-grid {
   display: grid;
   gap: 18px;
@@ -742,6 +749,41 @@ h3 {
   padding-left: 0;
 }
 
+.table-wrap {
+  width: 100%;
+  margin: 22px 0;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+
+.content-table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.content-table th,
+.content-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.content-table th {
+  background: #f8fafc;
+  color: var(--color-navy);
+  font-weight: 780;
+}
+
+.content-table tr:last-child td {
+  border-bottom: 0;
+}
+
 .section-link {
   margin-top: 22px;
 }
@@ -751,6 +793,7 @@ h3 {
   font-weight: 750;
 }
 
+/* Case Study */
 .case-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -837,6 +880,7 @@ h3 {
   margin-top: 12px;
 }
 
+/* Service Pages */
 .service-page {
   background: var(--color-surface);
 }
@@ -858,6 +902,7 @@ h3 {
   grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.72fr);
   gap: 42px;
   align-items: center;
+  min-width: 0;
 }
 
 .service-label {
@@ -903,7 +948,12 @@ h3 {
   margin-top: 28px;
 }
 
+.service-hero__actions--light {
+  margin-top: 22px;
+}
+
 .service-hero__panel {
+  min-width: 0;
   padding: 12px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-card);
@@ -1087,6 +1137,10 @@ h3 {
 
 .service-panel {
   padding: 24px;
+}
+
+.service-panel--spaced {
+  margin: 22px 0;
 }
 
 .service-panel h3,
@@ -1494,6 +1548,7 @@ h3 {
   font-weight: 650;
 }
 
+/* Footer */
 .site-footer {
   padding: 52px 0 24px;
   background: #020617;
@@ -1581,6 +1636,7 @@ h3 {
   box-shadow: 0 12px 24px rgba(22, 163, 74, 0.24);
 }
 
+/* Article Pages */
 .article-hero {
   position: relative;
   padding: 64px 0 58px;
@@ -1625,6 +1681,8 @@ h3 {
 .toc-card {
   position: sticky;
   top: calc(var(--header-height) + 20px);
+  min-width: 0;
+  max-width: 100%;
   padding: 20px;
 }
 
@@ -1647,6 +1705,8 @@ h3 {
 }
 
 .article-content {
+  width: 100%;
+  min-width: 0;
   max-width: 790px;
 }
 
@@ -1657,6 +1717,11 @@ h3 {
 
 .article-content h2 {
   font-size: clamp(1.65rem, 2.4vw, 2.25rem);
+}
+
+.article-content h3 {
+  margin-top: 22px;
+  font-size: clamp(1.2rem, 1.7vw, 1.45rem);
 }
 
 .article-content p {
@@ -1700,6 +1765,7 @@ h3 {
   font-size: clamp(1.6rem, 2.4vw, 2.1rem);
 }
 
+/* Responsive */
 @media (max-width: 1180px) {
   .site-nav {
     gap: 0;
@@ -1807,9 +1873,10 @@ h3 {
   .site-nav .nav-cta {
     margin-left: 0;
     text-align: center;
-  }
+}
 
-  .hero {
+/* Hero */
+.hero {
     min-height: auto;
   }
 
@@ -1890,7 +1957,18 @@ h3 {
   .container,
   .narrow,
   .breadcrumbs {
-    width: min(100% - 28px, var(--container-width));
+    width: min(100% - 40px, var(--container-width));
+  }
+
+  .service-hero__grid,
+  .service-layout,
+  .card-grid,
+  .case-grid,
+  .footer-grid,
+  .article-shell,
+  .split {
+    min-width: 0;
+    max-width: 100%;
   }
 
   h1 {
@@ -1959,7 +2037,7 @@ h3 {
   }
 
   .service-hero h1 {
-    font-size: clamp(2rem, 9vw, 2.375rem);
+    font-size: clamp(1.8rem, 8vw, 2rem);
     line-height: 1.14;
   }
 
@@ -1973,7 +2051,41 @@ h3 {
   }
 
   .service-hero__panel {
+    width: 100%;
+    max-width: 100%;
     padding: 10px;
+  }
+
+  .technical-visual {
+    min-height: 220px;
+  }
+
+  .technical-visual::before {
+    inset: 20px;
+  }
+
+  .technical-visual::after {
+    left: 20px;
+    right: 20px;
+    bottom: 32px;
+  }
+
+  .technical-visual__busbar {
+    left: 28px;
+    right: 28px;
+  }
+
+  .technical-visual__grid {
+    left: 28px;
+    right: 28px;
+    gap: 10px;
+  }
+
+  .technical-visual__meter {
+    right: 24px;
+    bottom: 48px;
+    width: 64px;
+    height: 64px;
   }
 
   .service-hero__facts {
@@ -2005,6 +2117,11 @@ h3 {
   .service-area-card,
   .service-process-list li {
     padding: 20px;
+  }
+
+  .content-table {
+    min-width: 520px;
+    font-size: 14px;
   }
 
   .service-process-list li {

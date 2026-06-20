@@ -867,6 +867,287 @@ function cardGrid(items, className = "three") {
         </article>`).join("\n        ")}</div>`;
 }
 
+function contentTable(headers, rows) {
+  return `<div class="table-wrap"><table class="content-table"><thead><tr>${headers.map((header) => `<th>${escapeHtml(header)}</th>`).join("")}</tr></thead><tbody>${rows.map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+}
+
+function checklist(items) {
+  return `<ul class="check-list">${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+}
+
+const articleDeepContent = {
+  "/artikel/apa-itu-slo-dan-nidi/": {
+    sections: [
+      {
+        id: "alur",
+        title: "Alur umum dari cek instalasi sampai dokumen",
+        paragraphs: [
+          "Pada proyek pasang baru atau perubahan daya, alur yang sehat biasanya dimulai dari pemeriksaan kondisi instalasi. Pemeriksaan ini bukan hanya melihat apakah listrik menyala, tetapi menilai panel, pembagian sirkit, ukuran kabel, proteksi, grounding, dan kerapian instalasi. Bila ada bagian yang belum sesuai, pekerjaan perbaikan sebaiknya dilakukan sebelum proses administrasi dilanjutkan.",
+          "Setelah kondisi teknis lebih jelas, data proyek dapat disusun: lokasi, daya, jenis bangunan, foto panel, status instalasi, serta kebutuhan pelanggan. Untuk ruko, gedung, atau fasilitas komersial, data tambahan seperti pembagian beban dan kondisi panel eksisting sering membantu mempercepat diskusi teknis. PT Jurti Agung Mulia membantu membaca bagian teknis ini agar pelanggan tidak mengajukan proses dengan informasi yang masih terlalu mentah."
+        ]
+      },
+      {
+        id: "dokumen",
+        title: "Checklist data sebelum konsultasi SLO NIDI",
+        checklist: [
+          "Alamat lokasi dan jenis bangunan: rumah, ruko, gedung, fasilitas komersial, atau industri.",
+          "Daya listrik saat ini dan rencana daya bila ada perubahan.",
+          "Kebutuhan utama: pasang baru, perubahan daya, kWh meter, serah terima bangunan, atau kebutuhan proyek.",
+          "Foto panel, kWh meter, jalur instalasi utama, dan kondisi grounding bila tersedia.",
+          "Status instalasi: baru selesai, masih berjalan, renovasi, atau instalasi lama yang perlu diperiksa.",
+          "Target waktu dan batasan jadwal lapangan."
+        ]
+      },
+      {
+        id: "perbandingan",
+        title: "Perbedaan ringkas SLO dan NIDI",
+        table: {
+          headers: ["Aspek", "SLO", "NIDI"],
+          rows: [
+            ["Fokus", "Kelayakan operasi instalasi listrik.", "Identitas instalasi dalam proses administrasi teknis."],
+            ["Kapan dibahas", "Saat instalasi perlu dinyatakan laik operasi.", "Saat data instalasi perlu dicatat sebagai identitas teknis."],
+            ["Data yang membantu", "Kondisi instalasi, panel, proteksi, grounding, dan pengujian.", "Lokasi, daya, jenis instalasi, dan informasi teknis pendukung."],
+            ["Catatan penting", "Mengikuti ketentuan lembaga atau pihak terkait.", "Tidak boleh dibuat tanpa proses dan data yang benar."]
+          ]
+        }
+      },
+      {
+        id: "contoh",
+        title: "Contoh kasus umum di lapangan",
+        paragraphs: [
+          "Contoh yang sering terjadi adalah ruko baru yang sudah memiliki instalasi dasar, tetapi panel belum rapi, label sirkit belum ada, dan grounding belum jelas titik ukurnya. Dalam kondisi seperti ini, pembahasan SLO NIDI sebaiknya tidak langsung meloncat ke dokumen. Tim perlu memeriksa apakah panel dan instalasi sudah siap diperiksa, lalu memberi catatan perbaikan bila ada bagian yang berpotensi menghambat proses.",
+          "Kasus lain adalah pelanggan yang ingin perubahan daya karena beban bertambah. Sebelum proses dilanjutkan, panel dan kabel utama perlu dilihat kembali. Bila kapasitas kabel, proteksi, atau pembagian beban belum memadai, perubahan daya dapat menimbulkan risiko operasional setelah listrik digunakan.",
+          "Pada bangunan yang sudah beroperasi, proses SLO NIDI juga perlu memperhatikan jadwal akses. Panel utama mungkin tidak bisa dibuka pada jam sibuk, sementara foto dan data lapangan tetap harus akurat. Karena itu, komunikasi awal sebaiknya mencakup siapa penanggung jawab lokasi, kapan tim boleh melakukan pengecekan, dan apakah ada area yang membutuhkan izin khusus sebelum pemeriksaan dilakukan."
+        ]
+      }
+    ],
+    areaLinks: [["SLO NIDI Tanjungpinang", "/area-layanan/kontraktor-listrik-tanjungpinang/"], ["SLO NIDI Batam", "/area-layanan/kontraktor-listrik-batam/"], ["SLO NIDI Karimun", "/area-layanan/kontraktor-listrik-karimun/"]],
+    faqs: [
+      ["Apakah SLO NIDI bisa diproses jika instalasi belum selesai?", "Sebaiknya instalasi diselesaikan atau minimal diperiksa lebih dulu. Bila masih ada pekerjaan utama, data teknis dan kondisi lapangan bisa berubah."],
+      ["Apakah panel lama harus diganti?", "Tidak selalu. Panel lama perlu diperiksa kondisinya. Jika proteksi, wiring, kapasitas, atau kerapian masih memadai, rekomendasi bisa berbeda dengan panel yang sudah rusak atau penuh."],
+      ["Apakah SLO NIDI berkaitan dengan tambah daya?", "Sering kali berkaitan, terutama bila perubahan daya membutuhkan pemeriksaan ulang kondisi instalasi dan panel."]
+    ]
+  },
+  "/artikel/perbedaan-lvmdp-mdp-sdp/": {
+    sections: [
+      {
+        id: "tabel-panel",
+        title: "Tabel perbandingan LVMDP, MDP, SDP, dan ATS/AMF",
+        table: {
+          headers: ["Panel", "Fungsi utama", "Umum ditemukan pada", "Catatan teknis"],
+          rows: [
+            ["LVMDP", "Distribusi utama tegangan rendah dari sumber utama.", "Gedung besar, industri, fasilitas dengan trafo sendiri.", "Perlu kapasitas busbar, metering, proteksi utama, dan ruang kerja yang jelas."],
+            ["MDP", "Panel distribusi utama untuk membagi daya ke panel turunan.", "Gedung komersial, hotel, ruko besar, pabrik.", "Harus mudah dibaca dari sisi incoming, outgoing, dan labeling."],
+            ["SDP", "Sub-panel untuk zona, lantai, tenant, atau area tertentu.", "Lantai gedung, area produksi, ruang utilitas.", "Membantu isolasi gangguan dan maintenance per area."],
+            ["ATS/AMF", "Mengatur perpindahan suplai PLN dan genset.", "Fasilitas yang membutuhkan backup power.", "Perlu urutan kerja, interlock, kontrol, dan pengujian fungsi."]
+          ]
+        }
+      },
+      {
+        id: "desain",
+        title: "Cara membaca desain panel secara praktis",
+        paragraphs: [
+          "Saat membaca kebutuhan panel, jangan hanya melihat nama panel. Perhatikan dari mana sumber daya masuk, ke mana daya didistribusikan, berapa arus beban, jenis beban apa yang dilayani, dan bagaimana proteksi dikoordinasikan. Panel untuk AC, pompa, lift, mesin produksi, dan tenant komersial bisa memiliki kebutuhan yang sangat berbeda.",
+          "Single line diagram sangat membantu karena memperlihatkan relasi antar panel. Bila gambar belum tersedia, data awal tetap bisa dikumpulkan melalui foto panel, daftar beban, kapasitas daya, dan kebutuhan operasi. Dari data tersebut kontraktor listrik dapat memberi masukan apakah panel cukup dirapikan, perlu ditambah sub-panel, atau perlu dirancang ulang."
+        ]
+      },
+      {
+        id: "checklist-panel",
+        title: "Checklist data sebelum membuat atau upgrade panel",
+        checklist: [
+          "Daya terpasang dan rencana penambahan daya.",
+          "Daftar beban utama: AC, pompa, mesin, lift, tenant, genset, atau PLTS.",
+          "Jumlah outgoing yang dibutuhkan dan area yang dilayani.",
+          "Foto panel eksisting, ruang panel, dan jalur kabel.",
+          "Kebutuhan ATS/AMF, capacitor bank, metering, atau indikator khusus.",
+          "Target operasi: panel baru, penggantian, perbaikan, atau upgrade bertahap."
+        ]
+      },
+      {
+        id: "contoh-panel",
+        title: "Contoh kasus umum",
+        paragraphs: [
+          "Pada gedung komersial, satu MDP sering melayani beberapa SDP per lantai atau per tenant. Jika tenant bertambah tetapi panel tidak dikaji ulang, beban dapat menumpuk pada sirkit tertentu. Gejalanya bisa berupa breaker sering trip, kabel panas, atau panel sulit dipelihara karena penambahan dilakukan tanpa labeling.",
+          "Pada area industri atau komersial di Batam, kebutuhan panel sering berkaitan dengan mesin, pompa, kompresor, atau sistem backup power. Dalam kasus seperti ini, diskusi panel sebaiknya melibatkan data beban dan pola operasi, bukan sekadar ukuran box panel.",
+          "Perbedaan lain yang sering luput adalah kebutuhan akses maintenance. Panel yang dipasang terlalu rapat dengan dinding, tidak punya ruang kerja, atau sulit dibuka akan menyulitkan pemeriksaan berkala. Saat desain panel dibahas sejak awal, ruang cadangan, jalur kabel, labeling, dan posisi metering bisa direncanakan agar operator tidak hanya mendapatkan panel yang menyala, tetapi juga panel yang mudah diawasi.",
+          "Untuk fasilitas yang berkembang bertahap, dokumentasi panel juga menentukan kualitas operasi jangka panjang. Catatan incoming, outgoing, spare feeder, rating breaker, dan daftar beban membuat penambahan berikutnya lebih terkontrol. Tanpa catatan ini, teknisi sering harus menelusuri ulang dari awal saat ada gangguan atau saat pemilik ingin menambah kapasitas."
+        ]
+      }
+    ],
+    areaLinks: [["Panel listrik Batam", "/area-layanan/kontraktor-listrik-batam/"], ["Panel listrik Bintan", "/area-layanan/kontraktor-listrik-bintan/"], ["Panel listrik Karimun", "/area-layanan/kontraktor-listrik-karimun/"]],
+    faqs: [
+      ["Apa hubungan panel dengan SLO NIDI?", "Panel yang rapi, sesuai kapasitas, dan mudah diperiksa membantu proses pemeriksaan teknis bila instalasi membutuhkan dokumen."],
+      ["Apakah capacitor bank selalu diperlukan?", "Tidak selalu. Kebutuhannya bergantung pada faktor daya, karakter beban, dan hasil kajian teknis."],
+      ["Apakah panel lama bisa di-upgrade sebagian?", "Bisa dikaji. Keputusan bergantung pada kondisi enclosure, busbar, wiring, ruang panel, proteksi, dan kebutuhan ekspansi."]
+    ]
+  },
+  "/artikel/maintenance-panel-listrik-gedung/": {
+    sections: [
+      {
+        id: "tanda",
+        title: "Tanda panel mulai membutuhkan maintenance",
+        checklist: [
+          "Breaker sering trip tanpa penyebab yang jelas.",
+          "Ada bau panas, bekas gosong, atau perubahan warna pada kabel dan terminal.",
+          "Panel berdebu, lembap, berkarat, atau sulit ditutup rapat.",
+          "Label sirkit hilang sehingga teknisi sulit melacak beban.",
+          "Beban gedung bertambah karena tenant, mesin, AC, atau pompa baru.",
+          "Panel belum pernah diperiksa setelah renovasi atau perubahan layout."
+        ]
+      },
+      {
+        id: "risiko-maintenance",
+        title: "Risiko teknis yang sering tersembunyi",
+        paragraphs: [
+          "Terminal longgar adalah salah satu risiko yang sering tidak terlihat dari luar. Koneksi yang tidak rapat dapat menimbulkan panas, mempercepat kerusakan isolasi, dan memicu gangguan pada breaker atau kabel. Karena itu tightening perlu dilakukan dengan metode aman dan jadwal shutdown yang jelas.",
+          "Risiko lain adalah beban tidak seimbang antar fasa. Pada gedung yang terus berubah, penambahan beban sering dilakukan bertahap. Tanpa pengecekan, satu fasa bisa bekerja lebih berat dibanding fasa lain. Kondisi ini dapat memengaruhi efisiensi, suhu panel, dan umur komponen."
+        ]
+      },
+      {
+        id: "tabel-output",
+        title: "Output maintenance yang sebaiknya diminta",
+        table: {
+          headers: ["Output", "Isi yang diharapkan", "Manfaat"],
+          rows: [
+            ["Catatan inspeksi", "Kondisi panel, kabel, terminal, proteksi, dan kebersihan.", "Menjadi dasar keputusan perbaikan."],
+            ["Temuan prioritas", "Masalah kritis, sedang, dan monitoring.", "Membantu pengelola mengatur anggaran dan shutdown."],
+            ["Foto dokumentasi", "Foto titik panas, koneksi bermasalah, atau panel yang perlu dirapikan.", "Memudahkan komunikasi internal."],
+            ["Rekomendasi teknis", "Tindakan lanjutan sesuai risiko.", "Mengurangi keputusan berbasis dugaan."]
+          ]
+        }
+      },
+      {
+        id: "contoh-maintenance",
+        title: "Contoh kasus umum",
+        paragraphs: [
+          "Pada gedung komersial, panel bisa terlihat normal selama jam operasional, tetapi thermoscanning menunjukkan satu outgoing lebih panas daripada sirkit lain. Setelah dicek pada jadwal aman, penyebabnya bisa berupa terminal longgar atau beban yang bertambah tanpa penyesuaian proteksi.",
+          "Pada hotel atau fasilitas publik, maintenance perlu direncanakan agar tidak mengganggu penghuni dan pengguna layanan. Tim biasanya memetakan panel prioritas, menentukan pekerjaan yang bisa dilakukan tanpa shutdown, lalu menjadwalkan pekerjaan internal panel pada waktu yang disetujui pengelola.",
+          "Contoh lain terjadi pada gedung yang baru selesai renovasi. Beban tambahan dari AC, pompa, lampu area, atau tenant baru sering masuk secara bertahap sehingga panel terlihat masih sama, padahal karakter bebannya berubah. Bila tidak ada pencatatan, teknisi berikutnya sulit membedakan mana instalasi lama dan mana penambahan baru. Maintenance yang baik membantu membuat kondisi ini lebih terbaca melalui labeling, foto temuan, dan rekomendasi prioritas.",
+          "Prioritas perbaikan juga perlu dibedakan. Temuan seperti bekas panas, koneksi longgar, atau bau gosong tidak boleh diperlakukan sama dengan panel yang hanya butuh pembersihan. Dengan klasifikasi kritis, sedang, dan monitoring, pengelola gedung dapat mengambil keputusan berdasarkan risiko operasional, bukan sekadar daftar pekerjaan panjang yang sulit ditindaklanjuti.",
+          "Setelah maintenance, pengelola sebaiknya menyimpan laporan sebagai baseline. Nilai arus, foto titik panas, kondisi terminal, dan rekomendasi teknis dapat dibandingkan dengan inspeksi berikutnya. Perbandingan ini membantu mendeteksi apakah masalah sudah selesai, muncul kembali, atau berkembang karena beban operasional berubah.",
+          "Untuk gedung dengan banyak penyewa, jadwal maintenance juga perlu dikomunikasikan sebagai bagian dari manajemen risiko. Area yang sensitif, seperti ruang server, dapur komersial, pompa, atau lift, perlu dipetakan agar pekerjaan teknis tidak memutus suplai tanpa rencana. Semakin jelas peta panel dan beban, semakin kecil kemungkinan gangguan menyebar ke area yang sebenarnya tidak sedang dikerjakan."
+        ]
+      }
+    ],
+    areaLinks: [["Maintenance listrik Tanjungpinang", "/area-layanan/kontraktor-listrik-tanjungpinang/"], ["Maintenance listrik Batam", "/area-layanan/kontraktor-listrik-batam/"], ["Maintenance listrik Bintan", "/area-layanan/kontraktor-listrik-bintan/"]],
+    faqs: [
+      ["Apakah thermoscanning cukup sebagai maintenance?", "Tidak. Thermoscanning membantu menemukan indikasi panas, tetapi tindak lanjut seperti pemeriksaan koneksi, beban, dan kebersihan tetap diperlukan."],
+      ["Kapan maintenance perlu dilakukan di luar jam kerja?", "Jika pekerjaan membutuhkan pembukaan panel, tightening, atau shutdown, jadwal di luar jam sibuk sering lebih aman untuk operasional gedung."],
+      ["Apakah panel baru tetap perlu diperiksa?", "Ya. Panel baru tetap perlu dicek setelah mulai beroperasi, terutama jika beban aktual berbeda dari rencana awal."]
+    ]
+  },
+  "/artikel/standar-grounding-instalasi-listrik/": {
+    sections: [
+      {
+        id: "faktor",
+        title: "Faktor yang memengaruhi tahanan grounding",
+        table: {
+          headers: ["Faktor", "Pengaruh", "Catatan lapangan"],
+          rows: [
+            ["Jenis tanah", "Tanah berbatu, berpasir, atau kering biasanya lebih sulit mencapai nilai rendah.", "Perlu strategi titik elektroda yang sesuai lokasi."],
+            ["Kelembapan", "Tanah lembap cenderung lebih konduktif.", "Nilai dapat berubah antar musim."],
+            ["Kedalaman elektroda", "Elektroda lebih dalam dapat membantu mencapai lapisan tanah yang lebih stabil.", "Tetap perlu pengukuran."],
+            ["Kualitas sambungan", "Sambungan buruk menaikkan tahanan dan rawan korosi.", "Koneksi harus rapi dan bisa diperiksa."]
+          ]
+        }
+      },
+      {
+        id: "perbaikan-grounding",
+        title: "Metode perbaikan grounding yang umum",
+        paragraphs: [
+          "Perbaikan grounding dapat dilakukan dengan menambah titik elektroda, memperdalam elektroda, memperbaiki sambungan, mengganti kabel yang tidak sesuai, atau menata ulang bonding dengan panel dan perangkat lain. Pilihan metode tidak bisa dipukul rata karena setiap lokasi memiliki karakter tanah dan kebutuhan sistem yang berbeda.",
+          "Pengukuran menjadi kunci. Tanpa pengukuran, pekerjaan grounding mudah berubah menjadi asumsi. Nilai tahanan perlu dibaca bersama kebutuhan sistem, standar rujukan, dan risiko bangunan. Untuk fasilitas dengan panel besar, PLTS, perangkat elektronik sensitif, atau penangkal petir, dokumentasi titik grounding juga penting agar maintenance berikutnya lebih mudah."
+        ]
+      },
+      {
+        id: "checklist-grounding",
+        title: "Checklist pemeriksaan grounding",
+        checklist: [
+          "Titik grounding dapat diakses untuk pemeriksaan.",
+          "Kabel grounding sesuai kebutuhan sistem dan tidak rusak.",
+          "Sambungan bersih, kuat, dan terlindungi dari korosi.",
+          "Panel, perangkat, dan sistem proteksi petir memiliki jalur pembumian yang jelas.",
+          "Nilai tahanan diukur dengan alat yang sesuai.",
+          "Hasil pengukuran dicatat untuk pembanding pemeriksaan berikutnya."
+        ]
+      },
+      {
+        id: "contoh-grounding",
+        title: "Contoh kasus umum",
+        paragraphs: [
+          "Pada ruko atau gedung lama, grounding sering ditemukan tanpa titik uji. Kabel tertanam langsung dan sulit dipastikan apakah masih tersambung baik. Dalam kondisi ini, pekerjaan perbaikan biasanya dimulai dari mencari jalur eksisting, membuat titik uji yang rapi, lalu melakukan pengukuran.",
+          "Pada bangunan dengan penangkal petir, kesalahan umum adalah jalur down conductor dan grounding panel tidak dikaji sebagai satu sistem. Akibatnya, maintenance menjadi sulit dan pemilik bangunan tidak memiliki catatan teknis yang jelas.",
+          "Kasus lain muncul pada bangunan yang memakai banyak perangkat elektronik, inverter, atau sistem kontrol. Pemilik sering baru menyadari pentingnya grounding setelah muncul gangguan berulang, pembacaan alat tidak stabil, atau perangkat proteksi bekerja tidak konsisten. Pemeriksaan grounding membantu memisahkan apakah masalah berasal dari pembumian, kualitas koneksi, proteksi, atau faktor instalasi lain.",
+          "Dokumentasi juga menjadi bagian penting dari standar kerja. Titik elektroda, jalur kabel, hasil ukur, dan rekomendasi perbaikan sebaiknya dicatat agar pemeriksaan berikutnya tidak dimulai dari nol. Untuk bangunan yang dikelola banyak pihak, catatan seperti ini membantu tim operasional menjaga konsistensi meskipun personel lapangan berganti.",
+          "Perbaikan grounding sebaiknya tidak hanya mengejar angka sesaat. Bila titik ukur sulit diakses, sambungan tidak terlindungi, atau jalur bonding tidak jelas, nilai yang terlihat baik hari ini belum tentu mudah dipertahankan. Sistem yang rapi harus bisa diperiksa ulang tanpa membongkar banyak bagian bangunan.",
+          "Pada proyek pesisir atau area dengan kelembapan tinggi, sambungan dan material juga perlu mendapat perhatian lebih. Korosi dapat membuat hasil awal terlihat baik tetapi menurun setelah beberapa waktu. Karena itu, metode kerja, jenis koneksi, perlindungan sambungan, dan akses inspeksi perlu dibahas bersama, terutama untuk bangunan yang beroperasi sepanjang tahun. Catatan ini penting untuk menjaga mutu pemeriksaan berikutnya."
+        ]
+      }
+    ],
+    areaLinks: [["Grounding Tanjungpinang", "/area-layanan/kontraktor-listrik-tanjungpinang/"], ["Grounding Bintan", "/area-layanan/kontraktor-listrik-bintan/"], ["Grounding Karimun", "/area-layanan/kontraktor-listrik-karimun/"]],
+    faqs: [
+      ["Apakah grounding harus selalu bernilai sangat rendah?", "Target nilai bergantung pada sistem dan standar rujukan. Yang penting adalah nilai diukur, dicatat, dan sesuai kebutuhan teknis."],
+      ["Apakah musim memengaruhi hasil pengukuran?", "Bisa. Kondisi tanah yang lebih kering atau lebih basah dapat memengaruhi nilai tahanan."],
+      ["Apakah grounding PLTS berbeda dengan grounding bangunan?", "Sistem PLTS perlu dikaitkan dengan proteksi DC/AC, panel, dan pembumian bangunan agar desainnya tidak terpisah."]
+    ]
+  },
+  "/artikel/cara-memilih-kontraktor-listrik/": {
+    sections: [
+      {
+        id: "kriteria",
+        title: "Kriteria kontraktor listrik yang layak dipertimbangkan",
+        table: {
+          headers: ["Kriteria", "Yang perlu dilihat", "Risiko jika diabaikan"],
+          rows: [
+            ["Kejelasan lingkup", "Pekerjaan, material, output, dan batas tanggung jawab tertulis.", "Biaya tambahan dan salah ekspektasi."],
+            ["Kemampuan teknis", "Memahami panel, proteksi, grounding, pengujian, dan dokumen teknis.", "Pekerjaan terlihat selesai tetapi sulit dirawat."],
+            ["Komunikasi risiko", "Mampu menjelaskan konsekuensi pilihan teknis.", "Keputusan proyek hanya berbasis harga."],
+            ["Dokumentasi", "Ada catatan temuan, foto, atau output sesuai lingkup.", "Sulit audit dan sulit troubleshooting."]
+          ]
+        }
+      },
+      {
+        id: "pertanyaan",
+        title: "Pertanyaan praktis sebelum memilih kontraktor",
+        checklist: [
+          "Apakah kontraktor meminta data daya, foto panel, dan kondisi lokasi sebelum memberi rekomendasi?",
+          "Apakah lingkup pekerjaan ditulis cukup jelas?",
+          "Apakah spesifikasi panel, kabel, proteksi, atau metode kerja dijelaskan?",
+          "Apakah jadwal shutdown dan risiko operasional dibahas?",
+          "Apakah kebutuhan SLO NIDI, commissioning, atau dokumen teknis dipisahkan dari pekerjaan fisik?",
+          "Apakah dokumen legalitas dapat ditunjukkan untuk verifikasi proyek resmi?"
+        ]
+      },
+      {
+        id: "contoh-kontraktor",
+        title: "Contoh kasus umum saat memilih kontraktor",
+        paragraphs: [
+          "Pemilik gedung sering menerima beberapa penawaran dengan harga berbeda jauh. Perbedaan itu belum tentu berarti salah satu terlalu mahal atau terlalu murah. Bisa jadi lingkup material, kapasitas panel, metode pemasangan, atau output dokumentasi memang berbeda. Karena itu, penawaran perlu dibandingkan secara teknis, bukan hanya dari total harga.",
+          "Untuk proyek di Batam, Bintan, atau Tanjungpinang, faktor mobilisasi dan jadwal survei juga perlu diperjelas. Kontraktor yang baik akan menanyakan akses lokasi, jam kerja yang diizinkan, kondisi operasional fasilitas, dan apakah pekerjaan boleh dilakukan saat bangunan tetap beroperasi."
+        ]
+      },
+      {
+        id: "redflag",
+        title: "Tanda bahaya dalam penawaran kelistrikan",
+        paragraphs: [
+          "Waspadai penawaran yang terlalu umum, tidak menyebut kapasitas, tidak menjelaskan proteksi, atau langsung menjanjikan hasil dokumen tanpa melihat instalasi. Pada pekerjaan kelistrikan, detail kecil seperti ukuran kabel, rating breaker, jalur grounding, dan labeling panel dapat menentukan keamanan serta kemudahan maintenance.",
+          "Waspadai juga kontraktor yang tidak mau membahas batas pekerjaan. Misalnya, pekerjaan panel disebut selesai, tetapi testing, labeling, atau integrasi ke instalasi eksisting tidak dijelaskan. Hal seperti ini sering menimbulkan pekerjaan tambahan setelah proyek berjalan.",
+          "Penawaran yang sehat biasanya menyebut asumsi teknis dengan jelas. Jika gambar belum ada, kontraktor perlu menjelaskan data apa yang masih perlu dikonfirmasi saat survei. Jika pekerjaan harus dilakukan di gedung aktif, jadwal shutdown, akses ruang panel, dan risiko gangguan operasional perlu dibahas sejak awal. Transparansi seperti ini membantu pemilik proyek memahami mengapa dua penawaran bisa berbeda meskipun judul pekerjaannya terlihat sama.",
+          "Untuk proyek resmi, legalitas perusahaan juga perlu dibaca sebagai bagian dari kesiapan kerja sama, bukan hiasan proposal. Dokumen resmi dapat diminta untuk verifikasi tender, kerja sama, atau administrasi proyek sesuai persetujuan perusahaan. Kontraktor yang profesional tidak perlu mengarang nomor, klaim klien, atau jaminan yang tidak dapat diverifikasi.",
+          "Keputusan akhir sebaiknya menggabungkan harga, lingkup, metode kerja, pengalaman teknis, dan kesiapan dokumentasi. Cara ini membantu pemilik memilih rekan kerja yang bisa diajak berdiskusi saat kondisi lapangan berubah.",
+          "Dalam praktiknya, kontraktor yang tepat biasanya lebih banyak bertanya di awal. Pertanyaan tentang daya, panel eksisting, jalur kabel, jadwal operasional, dan kebutuhan dokumen adalah tanda bahwa rekomendasi sedang dibangun dari kondisi lapangan, bukan dari template penawaran."
+        ]
+      }
+    ],
+    areaLinks: [["Kontraktor listrik Batam", "/area-layanan/kontraktor-listrik-batam/"], ["Kontraktor listrik Tanjungpinang", "/area-layanan/kontraktor-listrik-tanjungpinang/"], ["Kontraktor listrik Karimun", "/area-layanan/kontraktor-listrik-karimun/"]],
+    faqs: [
+      ["Apakah penawaran termurah selalu berisiko?", "Tidak selalu. Namun penawaran perlu dibandingkan dari lingkup, spesifikasi, metode, dan output, bukan hanya total harga."],
+      ["Kapan perlu survei lokasi?", "Survei sangat disarankan bila pekerjaan menyangkut panel, instalasi eksisting, perubahan daya, grounding, atau fasilitas yang tetap beroperasi."],
+      ["Apa tanda kontraktor memahami pekerjaan panel?", "Mereka menanyakan beban, kapasitas, incoming-outgoing, proteksi, ruang panel, wiring, labeling, dan kebutuhan testing."]
+    ]
+  }
+};
+
 const serviceTechnicalNotes = {
   instalasi: [
     ["Pembagian sirkit", "Titik penerangan, stop kontak, AC, pompa, mesin, dan beban khusus sebaiknya dipisah agar proteksi lebih mudah dibaca."],
@@ -957,6 +1238,130 @@ const serviceProcessSteps = {
   ]
 };
 
+const serviceDeepContent = {
+  slo: {
+    title: "Perbedaan SLO dan NIDI dalam proses teknis",
+    intro: "SLO NIDI perlu dibaca sebagai proses teknis dan administratif. Kondisi instalasi, data daya, panel, dan tujuan pelanggan harus jelas sebelum proses berjalan.",
+    table: {
+      headers: ["Topik", "SLO", "NIDI"],
+      rows: [
+        ["Fungsi", "Mendukung pernyataan laik operasi instalasi.", "Memberi identitas teknis instalasi."],
+        ["Kapan dibutuhkan", "Pasang baru, perubahan daya, serah terima, atau kebutuhan dokumen proyek.", "Saat data instalasi perlu dicatat dalam proses administrasi teknis."],
+        ["Data awal", "Kondisi instalasi, panel, grounding, daya, dan foto lapangan.", "Lokasi, daya, jenis bangunan, dan informasi instalasi."],
+        ["Catatan", "Mengikuti ketentuan pihak terkait.", "Tidak dibuat tanpa data dan proses yang benar."]
+      ]
+    },
+    checklistTitle: "Checklist dokumen dan data awal",
+    checklist: ["Lokasi lengkap dan kontak penanggung jawab.", "Daya listrik saat ini atau rencana daya.", "Kebutuhan: pasang baru, perubahan daya, kWh meter, atau dokumen proyek.", "Foto panel, kWh meter, jalur instalasi utama, dan grounding bila ada.", "Status instalasi: baru, renovasi, lama, atau perlu perbaikan.", "Target waktu dan batasan akses lokasi."],
+    subsections: [
+      ["Alur pasang baru", "Diskusi pasang baru dimulai dari lokasi, jenis bangunan, daya yang dibutuhkan, dan status instalasi. Setelah itu instalasi diperiksa agar panel, kabel, proteksi, dan grounding tidak menjadi kendala saat proses dokumen berjalan."],
+      ["Alur perubahan daya", "Pada perubahan daya, panel eksisting perlu dibaca ulang. Kapasitas kabel utama, rating proteksi, pembagian beban, dan kondisi panel harus sesuai dengan beban baru agar perubahan daya tidak menambah risiko operasional."],
+      ["Kondisi yang perlu diperbaiki", "Panel tidak rapi, sirkit tanpa label, kabel tidak sesuai kapasitas, grounding tidak jelas, proteksi sering trip, dan instalasi yang belum selesai adalah contoh kondisi yang perlu dibereskan sebelum proses dilanjutkan."]
+    ],
+    ctas: [
+      ["Konsultasi Pasang Baru", "Halo PT Jurti Agung Mulia, saya ingin konsultasi SLO/NIDI untuk pasang baru.\nLokasi:\nJenis bangunan:\nDaya yang dibutuhkan:\nStatus instalasi:\nTarget waktu:"],
+      ["Konsultasi Perubahan Daya", "Halo PT Jurti Agung Mulia, saya ingin konsultasi SLO/NIDI untuk perubahan daya.\nLokasi:\nDaya saat ini:\nDaya rencana:\nKondisi panel:\nTarget waktu:"]
+    ]
+  },
+  panel: {
+    title: "Pendalaman teknis panel listrik",
+    intro: "Panel listrik perlu dirancang dari beban, pola operasi, ruang panel, proteksi, dan kebutuhan maintenance. Nama panel saja tidak cukup untuk menentukan spesifikasi.",
+    table: {
+      headers: ["Panel", "Fungsi", "Data penting"],
+      rows: [
+        ["LVMDP", "Distribusi utama tegangan rendah dari sumber utama.", "Kapasitas incoming, busbar, metering, outgoing, dan ruang kerja."],
+        ["MDP", "Panel distribusi utama untuk area atau sistem tertentu.", "Pembagian beban, rating proteksi, dan jumlah outgoing."],
+        ["SDP", "Sub-panel untuk lantai, tenant, zona, atau kelompok beban.", "Area layanan, kapasitas kabel, dan labeling."],
+        ["ATS/AMF", "Perpindahan suplai PLN dan genset.", "Urutan kerja, interlock, kontrol, dan testing."]
+      ]
+    },
+    checklistTitle: "Checklist data sebelum pembuatan panel",
+    checklist: ["Daya terpasang dan daya rencana.", "Daftar beban utama dan beban cadangan.", "Single line diagram bila tersedia.", "Foto ruang panel dan panel eksisting.", "Kebutuhan ATS/AMF, capacitor bank, metering, atau indikator.", "Target commissioning dan kebutuhan dokumen."],
+    subsections: [
+      ["Kesalahan umum pada panel", "Kesalahan yang sering muncul adalah komponen tidak sesuai beban, ruang panel terlalu penuh, wiring tidak diberi label, grounding tidak jelas, dan tidak ada ruang ekspansi. Panel seperti ini mungkin berfungsi di awal, tetapi sulit diperiksa saat gangguan."],
+      ["Output pekerjaan panel", "Output yang sehat meliputi panel terpasang atau siap instalasi, wiring rapi, labeling, pengujian fungsi, catatan komponen utama, dan rekomendasi bila panel berkaitan dengan SLO NIDI atau commissioning."],
+      ["Keterkaitan dengan SLO NIDI", "Panel yang jelas incoming-outgoing, proteksi, dan grounding-nya akan lebih mudah diperiksa saat instalasi membutuhkan dokumen teknis atau test commissioning."]
+    ]
+  },
+  maintenance: {
+    title: "Pendalaman maintenance panel dan instalasi",
+    intro: "Maintenance listrik bukan hanya membersihkan panel. Pemeriksaan harus membaca panas, koneksi, beban, proteksi, kebersihan, dan risiko operasional.",
+    checklistTitle: "Checklist inspeksi panel",
+    checklist: ["Kondisi enclosure, pintu, gasket, dan ventilasi.", "Kebersihan panel dari debu, karat, kelembapan, atau benda asing.", "Kondisi kabel, terminal, lug, dan tanda panas.", "Pembacaan arus, tegangan, dan potensi beban tidak seimbang.", "Thermoscanning pada titik yang berisiko.", "Label sirkit dan akses untuk troubleshooting."],
+    subsections: [
+      ["Tanda panel perlu maintenance", "Breaker sering trip, bau panas, panel berdengung, kabel berubah warna, label hilang, atau beban bertambah adalah tanda yang perlu diperiksa. Pada gedung komersial, perubahan tenant juga sering mengubah karakter beban."],
+      ["Risiko terminal longgar", "Terminal longgar dapat menimbulkan panas lokal, menurunkan kualitas koneksi, dan merusak isolasi. Tightening perlu dilakukan dalam kondisi aman dan biasanya membutuhkan jadwal shutdown."],
+      ["Output laporan maintenance", "Laporan sebaiknya memuat temuan, foto, prioritas risiko, rekomendasi perbaikan, dan catatan apakah pekerjaan lanjutan membutuhkan shutdown."]
+    ]
+  },
+  trafo: {
+    title: "Pendalaman maintenance trafo 20 kV",
+    intro: "Trafo 20 kV adalah aset kritis. Pemeriksaan perlu memperhatikan minyak, isolasi, rasio belitan, panas, koneksi, dan jadwal shutdown.",
+    table: {
+      headers: ["Pengujian", "Tujuan", "Catatan"],
+      rows: [
+        ["BDV", "Membaca kekuatan dielektrik minyak trafo.", "Perlu dibaca bersama kondisi trafo lainnya."],
+        ["TTR", "Memeriksa rasio belitan trafo.", "Membantu melihat indikasi ketidaksesuaian rasio."],
+        ["Insulation test", "Membaca tahanan isolasi.", "Dilakukan sesuai prosedur dan kondisi aman."],
+        ["Thermoscanning", "Melihat titik panas pada koneksi atau panel pendukung.", "Berguna untuk preventive maintenance."]
+      ]
+    },
+    checklistTitle: "Checklist data trafo sebelum maintenance",
+    checklist: ["Lokasi dan akses ruang trafo.", "Kapasitas trafo dan tegangan kerja.", "Riwayat gangguan atau keluhan operasional.", "Jadwal shutdown yang memungkinkan.", "Dokumen atau hasil pengujian sebelumnya bila ada.", "Kondisi panel pendukung dan grounding."],
+    subsections: [
+      ["Risiko downtime", "Gangguan trafo dapat menghentikan operasi fasilitas secara luas. Karena itu preventive maintenance perlu dijadwalkan sebelum muncul gejala berat seperti suhu tidak normal, suara mencurigakan, atau indikasi penurunan isolasi."],
+      ["Koordinasi keselamatan", "Pekerjaan trafo tegangan menengah perlu metode kerja, isolasi sumber, dan koordinasi operasional yang jelas. Tidak semua pemeriksaan bisa dilakukan tanpa rencana shutdown."]
+    ]
+  },
+  grounding: {
+    title: "Pendalaman grounding dan penangkal petir",
+    intro: "Grounding yang baik harus bisa diukur, diperiksa, dan dikaitkan dengan panel, perangkat, struktur, serta sistem penangkal petir.",
+    checklistTitle: "Checklist pemeriksaan grounding",
+    checklist: ["Titik elektroda dapat diakses.", "Kabel grounding sesuai kebutuhan dan tidak rusak.", "Sambungan bersih, kuat, dan tidak korosi.", "Ada titik uji untuk pengukuran.", "Jalur down conductor penangkal petir jelas.", "Hasil pengukuran dicatat untuk pembanding berikutnya."],
+    subsections: [
+      ["Faktor resistansi tanah", "Jenis tanah, kelembapan, kedalaman elektroda, jumlah titik, dan kualitas sambungan memengaruhi nilai tahanan. Karena itu metode grounding di satu lokasi belum tentu cocok untuk lokasi lain."],
+      ["Metode perbaikan grounding", "Perbaikan dapat berupa penambahan titik elektroda, memperdalam elektroda, memperbaiki sambungan, mengganti kabel, atau menata ulang bonding dengan panel dan perangkat."],
+      ["Pentingnya pengukuran", "Pengukuran diperlukan untuk membaca kondisi aktual, bukan sekadar memastikan kabel grounding terlihat terpasang. Hasil ukur menjadi dasar rekomendasi perbaikan dan dokumentasi maintenance."],
+      ["Kesalahan umum grounding", "Kesalahan yang sering terjadi adalah tidak ada titik uji, sambungan tertanam tanpa dokumentasi, kabel tidak sesuai, dan sistem penangkal petir tidak dikaji bersama grounding panel."]
+    ]
+  },
+  plts: {
+    title: "Pendalaman instalasi PLTS",
+    intro: "PLTS perlu direncanakan dari profil beban, area pemasangan, inverter, proteksi DC/AC, grounding, dan integrasi dengan panel eksisting.",
+    table: {
+      headers: ["Sistem", "Karakter", "Catatan sederhana"],
+      rows: [
+        ["On-grid", "Terhubung dengan jaringan listrik utama.", "Perlu kajian teknis dan ketentuan interkoneksi yang relevan."],
+        ["Off-grid", "Bekerja mandiri dengan baterai atau sistem penyimpanan.", "Perlu perhitungan beban dan kapasitas baterai lebih detail."],
+        ["Hybrid", "Menggabungkan sumber jaringan dan penyimpanan.", "Desain proteksi dan kontrol perlu lebih hati-hati."]
+      ]
+    },
+    checklistTitle: "Komponen PLTS dan data awal",
+    checklist: ["Daya listrik saat ini dan pola pemakaian.", "Tujuan PLTS: efisiensi, backup, edukasi, atau kebutuhan fasilitas.", "Area pemasangan dan potensi bayangan.", "Kondisi panel eksisting dan jalur kabel.", "Kebutuhan inverter, proteksi DC/AC, isolator, dan grounding.", "Target commissioning dan rencana maintenance."],
+    subsections: [
+      ["Proteksi DC/AC", "Sisi DC dan AC memiliki karakter risiko berbeda. Isolator, proteksi arus lebih, arrester bila relevan, kabel, dan labeling perlu dibahas sejak desain."],
+      ["Integrasi panel eksisting", "PLTS tidak berdiri sendiri. Sistem perlu terhubung dengan panel eksisting, grounding, dan proteksi bangunan agar mudah dioperasikan serta dirawat."]
+    ]
+  }
+};
+
+function serviceDeepSection(service) {
+  const detail = serviceDeepContent[service.key];
+  if (!detail) {
+    return "";
+  }
+
+  return `    <section class="service-section service-section--muted">
+      <div class="container">
+        ${sectionHeading("Pendalaman teknis", detail.title, detail.intro)}
+        ${detail.table ? contentTable(detail.table.headers, detail.table.rows) : ""}
+        ${detail.checklist ? `<div class="service-panel service-panel--spaced"><h3>${escapeHtml(detail.checklistTitle)}</h3>${checklist(detail.checklist)}</div>` : ""}
+        <div class="service-card-grid">${(detail.subsections || []).map(([title, text]) => `<article class="service-card"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p></article>`).join("")}</div>
+        ${detail.ctas ? `<div class="service-hero__actions service-hero__actions--light">${detail.ctas.map(([label, message]) => `<a class="btn btn-blue" href="${waLink(message)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`).join("")}</div>` : ""}
+      </div>
+    </section>`;
+}
+
 function serviceTechnicalSection(service) {
   const notes = serviceTechnicalNotes[service.key] || service.scope.slice(0, 4);
   return `    <section class="service-section">
@@ -1020,6 +1425,7 @@ function servicePage(service) {
       </div>
     </section>
     ${serviceTechnicalSection(service)}
+    ${serviceDeepSection(service)}
     ${processSection(service)}
     ${areaCardsSection(`Jasa ${service.nav} tersedia untuk Kepulauan Riau dan proyek nasional sesuai kebutuhan.`)}
     <section class="service-section service-section--muted">
@@ -1156,14 +1562,62 @@ function homepage() {
 
 function projectCards() {
   const cards = [
-    ["Instalasi listrik gedung dan ruko", "Kebutuhan titik listrik, panel distribusi, jalur kabel, dan proteksi harus mengikuti fungsi ruang.", "Instalasi penerangan, daya, panel, grounding, pengujian dasar.", "Dokumentasi pekerjaan dan rekomendasi teknis."],
-    ["Panel distribusi LVMDP/MDP/SDP", "Panel perlu rapi, aman diperiksa, dan sesuai kapasitas beban.", "Perakitan atau instalasi panel, wiring, proteksi, labeling, testing.", "Panel siap operasi dan catatan komponen utama."],
-    ["Maintenance panel dan trafo", "Downtime dapat muncul dari panas, koneksi longgar, atau penurunan kualitas isolasi.", "Inspeksi, thermoscanning, tightening, BDV, TTR, insulation test sesuai lingkup.", "Temuan teknis dan prioritas perbaikan."],
-    ["PLTS / solar panel", "Kapasitas perlu dihitung dari beban, ruang, dan integrasi panel.", "Survey, instalasi modul, inverter, proteksi, grounding, commissioning.", "Sistem terpasang dan arahan maintenance."],
-    ["Grounding dan penangkal petir", "Sistem pembumian perlu titik uji, koneksi baik, dan integrasi panel.", "Pemasangan grounding, down conductor, pengukuran, dan perbaikan koneksi.", "Hasil pengukuran bila masuk lingkup."],
-    ["SLO NIDI dan commissioning", "Dokumen dan pengujian perlu data teknis yang jelas.", "Pemeriksaan instalasi, arahan dokumen, test commissioning sesuai kebutuhan.", "Arahan proses dan catatan hasil pemeriksaan."]
+    {
+      category: "Instalasi listrik gedung komersial",
+      location: "Gedung komersial di Kepulauan Riau",
+      challenge: "Kebutuhan titik listrik, panel distribusi, jalur kabel, dan proteksi harus mengikuti fungsi ruang serta rencana operasional bangunan.",
+      scope: "Instalasi penerangan, daya, panel distribusi, grounding, pemeriksaan fungsi, dan rekomendasi teknis sesuai lingkup.",
+      output: "Instalasi lebih tertata, panel mudah diperiksa, dan catatan teknis untuk serah terima pekerjaan.",
+      documentation: "Foto progres, daftar titik, catatan panel, dan hasil pemeriksaan fungsi dapat ditambahkan setelah tersedia.",
+      status: "Nama klien ditampilkan setelah persetujuan publikasi."
+    },
+    {
+      category: "SLO NIDI dan pemeriksaan instalasi",
+      location: "Fasilitas kesehatan di Tanjungpinang",
+      challenge: "Instalasi harus dibaca dari sisi dokumen, kondisi panel, pembagian sirkit, grounding, dan kesiapan teknis sebelum proses administrasi.",
+      scope: "Pemeriksaan instalasi, arahan data teknis, rekomendasi perbaikan, dan pendampingan kebutuhan dokumen sesuai ketentuan.",
+      output: "Daftar data awal, catatan kondisi instalasi, dan arahan teknis sebelum proses dokumen dilanjutkan.",
+      documentation: "Checklist dokumen, foto panel, catatan temuan, dan status tindak lanjut dapat ditambahkan.",
+      status: "Nama fasilitas tidak ditampilkan tanpa persetujuan."
+    },
+    {
+      category: "Panel LVMDP, MDP, SDP, ATS/AMF",
+      location: "Kawasan industri atau komersial di Batam",
+      challenge: "Panel perlu menyesuaikan kapasitas beban, pola operasi, kebutuhan backup power, proteksi, ruang panel, dan akses maintenance.",
+      scope: "Perencanaan panel, wiring, proteksi, labeling, terminasi, pemeriksaan fungsi, dan koordinasi commissioning.",
+      output: "Panel siap digunakan sesuai lingkup, wiring lebih rapi, dan identifikasi sirkit lebih mudah dibaca.",
+      documentation: "Single line diagram, daftar komponen, foto panel, dan catatan testing dapat ditambahkan bila tersedia.",
+      status: "Nama klien ditampilkan setelah persetujuan publikasi."
+    },
+    {
+      category: "Maintenance panel dan trafo",
+      location: "Area hospitality/resort di Bintan",
+      challenge: "Pekerjaan perlu menjaga operasional fasilitas, mengatur jadwal shutdown, dan membaca risiko panas, terminal longgar, serta kualitas isolasi.",
+      scope: "Inspeksi panel, thermoscanning, tightening sesuai kondisi aman, BDV/TTR/insulation test bila masuk lingkup, dan rekomendasi perbaikan.",
+      output: "Catatan temuan, prioritas risiko, rekomendasi teknis, dan dasar perencanaan maintenance berikutnya.",
+      documentation: "Foto temuan, hasil pengukuran, daftar panel, dan catatan shutdown dapat ditambahkan setelah disetujui.",
+      status: "Nama klien tidak dipublikasikan tanpa persetujuan tertulis."
+    },
+    {
+      category: "Grounding dan penangkal petir",
+      location: "Bangunan komersial di Kepulauan Riau",
+      challenge: "Sistem pembumian perlu titik uji, koneksi yang bisa diperiksa, nilai tahanan yang diukur, dan integrasi dengan panel atau penangkal petir.",
+      scope: "Pemasangan elektroda, kabel grounding, bonding, down conductor, pengukuran, dan perbaikan sambungan sesuai lingkup.",
+      output: "Sistem grounding lebih mudah diuji, jalur pembumian lebih jelas, dan hasil pengukuran dapat menjadi catatan teknis.",
+      documentation: "Titik grounding, hasil ukur, foto sambungan, dan layout sederhana dapat ditambahkan.",
+      status: "Identitas proyek ditampilkan setelah ada persetujuan."
+    },
+    {
+      category: "PLTS / solar panel dan integrasi panel",
+      location: "Fasilitas komersial di Kepulauan Riau",
+      challenge: "Kapasitas PLTS perlu dihitung dari profil beban, area pemasangan, proteksi DC/AC, grounding, dan integrasi panel eksisting.",
+      scope: "Survey area, instalasi modul, inverter, proteksi, jalur kabel, grounding, integrasi panel, dan commissioning sesuai lingkup.",
+      output: "Sistem PLTS terpasang sesuai rencana teknis dan memiliki arahan maintenance awal.",
+      documentation: "Foto instalasi, data komponen, catatan commissioning, dan skema integrasi dapat ditambahkan.",
+      status: "Nama klien ditampilkan setelah persetujuan publikasi."
+    }
   ];
-  return `<div class="case-grid">${cards.map(([title, challenge, scope, output]) => `<article class="case-card"><span>Jenis proyek</span><h3>${escapeHtml(title)}</h3><dl><div><dt>Tantangan teknis</dt><dd>${escapeHtml(challenge)}</dd></div><div><dt>Lingkup pekerjaan</dt><dd>${escapeHtml(scope)}</dd></div><div><dt>Output/dokumen</dt><dd>${escapeHtml(output)}</dd></div><div><dt>Status publikasi klien</dt><dd>Nama klien ditampilkan setelah persetujuan.</dd></div></dl></article>`).join("")}</div>`;
+  return `<div class="case-grid">${cards.map((item) => `<article class="case-card"><span>Kategori pekerjaan</span><h3>${escapeHtml(item.category)}</h3><dl><div><dt>Lokasi umum</dt><dd>${escapeHtml(item.location)}</dd></div><div><dt>Tantangan teknis</dt><dd>${escapeHtml(item.challenge)}</dd></div><div><dt>Lingkup pekerjaan</dt><dd>${escapeHtml(item.scope)}</dd></div><div><dt>Output pekerjaan</dt><dd>${escapeHtml(item.output)}</dd></div><div><dt>Dokumentasi yang bisa ditambahkan</dt><dd>${escapeHtml(item.documentation)}</dd></div><div><dt>Status publikasi klien</dt><dd>${escapeHtml(item.status)}</dd></div></dl></article>`).join("")}</div>`;
 }
 
 function finalCta(text = "Diskusikan kebutuhan instalasi listrik, panel, SLO NIDI, maintenance, PLTS, grounding, atau commissioning dengan tim PT Jurti Agung Mulia.", waMessage = "Halo PT Jurti Agung Mulia, saya ingin konsultasi kebutuhan kelistrikan.\nLokasi:\nJenis bangunan:\nKebutuhan:\nTarget waktu:") {
@@ -1242,20 +1696,20 @@ function areaPage(area) {
 
 function legalitasPage() {
   const title = "Legalitas dan Standar Kerja | PT Jurti Agung Mulia";
-  const description = "Halaman legalitas PT Jurti Agung Mulia: standar kerja, PUIL, K3, SNI/IEC bila relevan, dan placeholder aman untuk dokumen resmi tanpa nomor palsu.";
+  const description = "Halaman legalitas PT Jurti Agung Mulia: dokumen perusahaan untuk verifikasi proyek, tender, kerja sama resmi, standar kerja, PUIL, K3, dan SNI/IEC bila relevan.";
   const wa = "Halo PT Jurti Agung Mulia, saya ingin meminta profil perusahaan/legalitas.\nNama perusahaan:\nKebutuhan:\nLokasi proyek:\nDokumen yang dibutuhkan:";
-  const main = `${pageHero({ eyebrow: "Legalitas", h1: "Legalitas dan Standar Kerja PT Jurti Agung Mulia", lead: "Informasi legalitas, standar kerja, dan dokumen perusahaan untuk kebutuhan tender, proyek, kerja sama, dan verifikasi teknis tanpa menampilkan nomor yang belum diberikan secara resmi.", cta: { href: waLink(wa), label: "Minta Profil/Legalitas", external: true } })}
+  const main = `${pageHero({ eyebrow: "Legalitas", h1: "Legalitas dan Standar Kerja PT Jurti Agung Mulia", lead: "Informasi legalitas, standar kerja, dan dokumen perusahaan untuk kebutuhan verifikasi proyek, tender, kerja sama resmi, dan koordinasi teknis.", cta: { href: waLink(wa), label: "Minta Profil/Legalitas", external: true } })}
     <section class="section">
       <div class="container split">
         <div>
           <span class="eyebrow">Prinsip legalitas</span>
-          <h2>Dokumen resmi ditunjukkan sesuai kebutuhan proyek.</h2>
-          <p>PT Jurti Agung Mulia tidak menampilkan nomor SBU, IUJPTL, PJT, tenaga teknik, atau dokumen K3 tanpa data resmi yang siap dipublikasikan. Untuk kebutuhan tender, proyek, atau kerja sama, dokumen dapat diminta melalui kontak resmi perusahaan.</p>
-          <p>Pendekatan ini menjaga akurasi informasi dan menghindari klaim legalitas yang tidak dapat diverifikasi oleh calon pelanggan.</p>
+          <h2>Dokumen resmi tersedia untuk verifikasi proyek.</h2>
+          <p>Dokumen legalitas tersedia untuk kebutuhan verifikasi proyek, tender, dan kerja sama resmi. Dokumen resmi PT Jurti Agung Mulia dapat ditunjukkan sesuai kebutuhan dan persetujuan perusahaan melalui kontak resmi.</p>
+          <p>PT Jurti Agung Mulia menjaga akurasi dokumen dan tidak menampilkan informasi yang tidak dapat diverifikasi. Pendekatan ini membantu calon mitra memperoleh informasi yang tepat tanpa menimbulkan klaim yang tidak dapat dipertanggungjawabkan.</p>
         </div>
         <div class="legal-card">
-          <h3>Placeholder dokumen aman</h3>
-          <ul class="service-info-list"><li>SBU atau klasifikasi usaha: ditunjukkan saat tersedia untuk kebutuhan proyek.</li><li>IUJPTL atau dokumen perizinan terkait: diverifikasi sesuai permintaan kerja sama.</li><li>PJT dan tenaga teknik: data personel resmi ditunjukkan sesuai kebutuhan tender.</li><li>Dokumen K3: disiapkan sesuai lingkup dan persyaratan proyek.</li></ul>
+          <h3>Dokumen yang dapat diminta</h3>
+          <ul class="service-info-list"><li>Profil perusahaan untuk kebutuhan prakualifikasi atau kerja sama.</li><li>Dokumen perizinan dan legalitas yang relevan dengan kebutuhan proyek.</li><li>Informasi penanggung jawab teknis sesuai kebutuhan tender atau koordinasi proyek.</li><li>Dokumen K3 dan standar kerja sesuai lingkup serta persyaratan pekerjaan.</li></ul>
         </div>
       </div>
     </section>
@@ -1311,7 +1765,32 @@ function artikelIndex() {
 }
 
 function articlePage(article) {
-  const articleText = [article.intro, ...article.sections.flatMap(([, title, paragraphs]) => [title, ...paragraphs])].join(" ");
+  const deep = articleDeepContent[article.slug] || { sections: [], areaLinks: [], faqs: [] };
+  const mergedFaqs = [...article.faqs, ...(deep.faqs || [])];
+  const deepText = (deep.sections || []).flatMap((section) => [
+    section.title,
+    ...(section.paragraphs || []),
+    ...(section.checklist || []),
+    ...(section.table?.headers || []),
+    ...((section.table?.rows || []).flat())
+  ]);
+  const tocItems = [...article.toc.filter(([, id]) => id !== "faq"), ...(deep.sections || []).map((section) => [section.title, section.id]), ["FAQ", "faq"]];
+  const articleText = [
+    article.category,
+    article.h1,
+    article.intro,
+    ...tocItems.map(([label]) => label),
+    ...article.sections.flatMap(([, title, paragraphs]) => [title, ...paragraphs]),
+    ...deepText,
+    "Layanan terkait",
+    ...article.related.flatMap(([label]) => [label]),
+    ...(deep.areaLinks || []).length ? ["Area layanan terkait", "Untuk proyek di Kepulauan Riau, kebutuhan teknis perlu menyesuaikan lokasi, jadwal survei, dan mobilisasi.", ...(deep.areaLinks || []).flatMap(([label]) => [label])] : [],
+    "FAQ",
+    ...mergedFaqs.flat(),
+    "Konsultasikan kondisi proyek Anda",
+    "Kirim lokasi, daya listrik bila ada, dan kebutuhan utama agar tim dapat memberi arahan awal yang lebih relevan.",
+    "Konsultasi WhatsApp"
+  ].join(" ");
   const schemas = [
     jsonLd({
       "@context": "https://schema.org",
@@ -1329,8 +1808,10 @@ function articlePage(article) {
       mainEntityOfPage: `${SITE}${article.slug}`
     }),
     breadcrumbs([{ name: "Beranda", url: "/" }, { name: "Artikel", url: "/artikel/" }, { name: article.h1, url: article.slug }]),
-    faqSchema(article.faqs)
+    faqSchema(mergedFaqs)
   ];
+  const deepHtml = (deep.sections || []).map((section) => `<section id="${section.id}"><h2>${escapeHtml(section.title)}</h2>${(section.paragraphs || []).map((p) => `<p>${escapeHtml(p)}</p>`).join("")}${section.table ? `<h3>Ringkasan perbandingan</h3>${contentTable(section.table.headers, section.table.rows)}` : ""}${section.checklist ? `<h3>Checklist praktis</h3>${checklist(section.checklist)}` : ""}</section>`).join("");
+  const areaLinks = (deep.areaLinks || []).length ? `<section class="article-related"><h2>Area layanan terkait</h2><p>Untuk proyek di Kepulauan Riau, kebutuhan teknis perlu menyesuaikan lokasi, jadwal survei, dan mobilisasi.</p><ul>${deep.areaLinks.map(([label, url]) => `<li><a href="${url}">${escapeHtml(label)}</a></li>`).join("")}</ul></section>` : "";
   const main = `    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Beranda</a> / <a href="/artikel/">Artikel</a> / <span>${escapeHtml(article.h1)}</span></nav>
     <article class="article-layout">
       <header class="article-hero">
@@ -1341,11 +1822,13 @@ function articlePage(article) {
         </div>
       </header>
       <div class="container article-shell">
-        <aside class="toc-card" aria-label="Daftar isi"><h2>Daftar Isi</h2><ol>${article.toc.map(([label, id]) => `<li><a href="#${id}">${escapeHtml(label)}</a></li>`).join("")}</ol></aside>
+        <aside class="toc-card" aria-label="Daftar isi"><h2>Daftar Isi</h2><ol>${tocItems.map(([label, id]) => `<li><a href="#${id}">${escapeHtml(label)}</a></li>`).join("")}</ol></aside>
         <div class="article-content">
           ${article.sections.map(([id, title, paragraphs]) => `<section id="${id}"><h2>${escapeHtml(title)}</h2>${paragraphs.map((p) => `<p>${escapeHtml(p)}</p>`).join("")}</section>`).join("")}
+          ${deepHtml}
           <section class="article-related"><h2>Layanan terkait</h2><ul>${article.related.map(([label, url]) => `<li><a href="${url}">${escapeHtml(label)}</a></li>`).join("")}</ul></section>
-          <section id="faq"><h2>FAQ</h2><div class="service-faq-list" data-faq-accordion>${article.faqs.map(([q, a]) => `<details><summary>${escapeHtml(q)}</summary><p>${escapeHtml(a)}</p></details>`).join("")}</div></section>
+          ${areaLinks}
+          <section id="faq"><h2>FAQ</h2><div class="service-faq-list" data-faq-accordion>${mergedFaqs.map(([q, a]) => `<details><summary>${escapeHtml(q)}</summary><p>${escapeHtml(a)}</p></details>`).join("")}</div></section>
           <section class="article-cta"><h2>Konsultasikan kondisi proyek Anda</h2><p>Kirim lokasi, daya listrik bila ada, dan kebutuhan utama agar tim dapat memberi arahan awal yang lebih relevan.</p><a class="btn btn-yellow" href="${waLink(article.wa)}" target="_blank" rel="noopener">Konsultasi WhatsApp</a></section>
         </div>
       </div>
